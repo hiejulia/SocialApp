@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
-// import {TimelinePage} from '../timeline/timeline';
-// import {PeoplePage} from '../people/people';
-// import {AccountPage} from '../account/account';
+import {TimelinePage} from '../timeline/timeline';
+import {PeoplePage} from '../people/people';
+import {AccountPage} from '../account/account';
 
 
 /*
