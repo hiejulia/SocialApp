@@ -7,3 +7,8 @@ A simple social cross-platform mobile app
 + Ionic 2
 + Angular 2
 + Firebase
+
+
+
+## How to run / install
++ `ionic platform add android` or `ionic run android`
