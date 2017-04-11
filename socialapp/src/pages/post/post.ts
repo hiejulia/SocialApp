@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import {ViewController, ActionSheet} from 'ionic-angular';
+import {ViewController} from 'ionic-angular';
 import {SocialProvider} from '../../providers/social';
 import {UtilProvider} from '../../providers/util';
 

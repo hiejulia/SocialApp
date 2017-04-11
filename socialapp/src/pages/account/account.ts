@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,ActionSheet } from 'ionic-angular';
-import {FirebaseAuthConfig,FirebaseAuthState,AngularFire} from 'angularfire2';
+import { NavController, NavParams } from 'ionic-angular';
+import {AngularFire} from 'angularfire2';
 import {UtilProvider} from '../../providers/util';
 import {UserProvider} from '../../providers/user';
 import {SocialProvider} from '../../providers/social';

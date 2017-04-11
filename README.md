@@ -14,4 +14,3 @@ A simple social cross-platform mobile app
 + `ionic platform add android` or `ionic run android`
 
 
-- create account

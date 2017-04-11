@@ -22,21 +22,24 @@ import {AngularFire} from 'angularfire2';
   templateUrl: 'create-account.html'
 })
 export class CreateAccountPage {
-  createAccountForm;
+  createForm;
   password:FormControl;
   authProvider;
   storage = new Storage(localStorage);
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-  form:FormBuilder,  auth: AuthProvider,  
-
+  form:FormBuilder,  authProvider: AuthProvider,  
+//----
+public af: AngularFire, 
+      public userProvider: UserProvider,
+      public util: UtilProvider
   
   
   
   
   ) {
 
-    this.password = new Control("",Validators.compose([Validators.required, Validators.minLength(6)]));
+    this.password = new FormControl("",Validators.compose([Validators.required, Validators.minLength(6)]));
         this.createForm = form.group({
             username: ["", Validators.required],
             name: ["", Validators.required],
@@ -44,7 +47,7 @@ export class CreateAccountPage {
             password:this.password,
             repass: ["", Validators.required]
         });
-        this.auth = auth;
+        this.authProvider = authProvider;
 
   }
 
@@ -81,16 +84,18 @@ export class CreateAccountPage {
         username = username.toLowerCase();
         if(password !== repass) {
             let alert = this.util.doAlert("Error", "Password doesn't matched", "Ok");
-            this.nav.present(alert);
+            // this.nav.present(alert);
+            alert.present();
         } else {
-            this.userProvider.isUsernameFree(username)
+            this.userProvider.isUsernameValid(username)
             .then(value => {
                 if(value === false) {
                     let alert = this.util.doAlert("Error", "Username not available", "Ok");
-                    this.nav.present(alert);
+                    // this.nav.present(alert);
+                    alert.present();
                 } else {
                     // Create Account
-                    this.fbAuth.createUser({email: email, password: password})
+                    this.userProvider.createUser({email: email, password: password})
                     .then(value => {
                         this.userProvider.saveUser(value);
                         this.userProvider.createUser({email: email, username: username, name: name});

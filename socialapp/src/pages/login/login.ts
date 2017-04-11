@@ -1,12 +1,12 @@
 import { Component ,Inject} from '@angular/core';
-import { NavController, NavParams,Alert } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import {Storage, LocalStorage} from 'angular';
 import{TabsPage } from '../tabs/tabs';
 import {FormBuilder,Validators} from '@angular/forms';
 import {AuthProvider} from '../../providers/auth';
 import {UserProvider} from '../../providers/user';
 import {UtilProvider} from '../../providers/util';
-import {FirebaseAuthConfig,FirebaseAuthState,AngularFire} from 'angularfire2';
+import {AngularFire} from 'angularfire2';
 import {CreateAccountPage} from '../../pages/create-account/create-account';
 import {validateEmail} from '../validators/email';
 // import {NavController} from "ionic-angular/index";

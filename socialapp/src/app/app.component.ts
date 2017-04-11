@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import {FIREBASE_PROVIDERS,defaultFirebase,firebaseAuthConfig,AuthProviders,AuthMethods}from 'angularfire2';
+import {FIREBASE_PROVIDERS,AuthProviders,AuthMethods}from 'angularfire2';
 import {TabsPage} from '../pages/tabs/tabs';
 import {LoginPage} from '../pages/login/login';
 import {AuthProvider} from '../providers/auth';
