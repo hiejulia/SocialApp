@@ -12,11 +12,19 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'timeline.html'
 })
 export class TimelinePage {
+  posts:any;
+  userInput;
+  feeds:any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TimelinePage');
+  }
+
+  openPost(){
+    let modal = Modal.create(PostPageModal); 
+    modal.present(); 
   }
 
 }
