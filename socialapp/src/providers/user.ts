@@ -49,7 +49,7 @@ export class UserProvider {
     });
     return promise;
   }
-
+//search user with given user name
   searchUser(username){
     let query={
       orderByChild:'username'
@@ -71,7 +71,7 @@ export class UserProvider {
         return  this.af.database.list(`/users/${uid}/followers`);
       });
   }
-
+//create  user
   createUser(userData){
     return this.getUid()
       .then(uid => {
@@ -80,7 +80,7 @@ export class UserProvider {
         return  user.set(userData);
       });
   }
-
+//update profile
   updateProfile(obj){
     return this.getUid()
       .then(uid => {

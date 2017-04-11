@@ -22,7 +22,7 @@ export class AuthProvider {
   }
 
   getAuth(){
-    return this.af.auth;
+    return this.af.auth();
   }
 
 //sign in = log in
@@ -31,11 +31,11 @@ export class AuthProvider {
   }
 //create account
   createAccount(credentials){
-    return this.af.auth.createUser(credentials);
+    return this.af.createUser(credentials);
   }
 
   logout(){
-    firebase.auth().signOut();
+    this.af.logout();
   }
 
 }

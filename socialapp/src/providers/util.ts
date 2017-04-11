@@ -51,7 +51,7 @@ ia[i] = byteString.charCodeAt(i);
     }
     //write the arraybuffer to a blob 
      let bb = new Blob([ab], {type:mimeString});
-     return bb;
+     return bb;//return the blob//convert to the image
 
   }
 
