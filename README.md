@@ -12,3 +12,6 @@ A simple social cross-platform mobile app
 
 ## How to run / install
 + `ionic platform add android` or `ionic run android`
+
+
+- create account
