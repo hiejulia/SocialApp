@@ -6,9 +6,10 @@ import {FormBuilder,Validators} from '@angular/forms';
 import {AuthProvider} from '../../providers/auth';
 import {UserProvider} from '../../providers/user';
 import {UtilProvider} from '../../providers/util';
-import {firebaseAuthConfig,FirebaseAuthState} from 'angularfire2';
+import {FirebaseAuthConfig,FirebaseAuthState,AngularFire} from 'angularfire2';
 import {CreateAccountPage} from '../../pages/create-account/create-account';
-import {validateEmail} from '../../validators/email';
+import {validateEmail} from '../validators/email';
+// import {NavController} from "ionic-angular/index";
 /*
   Generated class for the Login page.
 
@@ -25,8 +26,7 @@ export class LoginPage {
   storage = new Storage(LocalStorage);
 
   constructor(public navCtrl: NavController, public navParams: NavParams,form:FormBuilder,authProvider:AuthProvider,
-  public utilProvider:UtilProvider,
-  @Inject(FirebaseAuth) public fbAuth:FirebaseAuthState) {
+  public utilProvider:UtilProvider, public af:AngularFire) {
     this.loginForm = form.group({
       email: ["", Validators.compose([Validators.required,
         validateEmail])],
@@ -36,9 +36,9 @@ export class LoginPage {
 
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
+  // // ionViewDidLoad() {
+  // //   console.log('ionViewDidLoad LoginPage');
+  // }
   //create Account page
   createAccount(){
     this.navCtrl.push(CreateAccountPage);
