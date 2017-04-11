@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController,NavParams} from 'ionic-angular';
 import {TabsPage} from '../tabs/tabs';
-import {FormBuilder, Validators, Control} from '@angular/forms';
+import {FormBuilder, Validators,FormControl} from '@angular/forms';
 import {validateEmail} from '../validators/email';
 import {AuthProvider} from '../../providers/auth-provider/auth-provider';
 import {UserProvider} from '../../providers/user-provider/user-provider';
@@ -22,14 +22,23 @@ import {Inject} from '@angular/core';
 })
 export class CreateAccountPage {
   createAccountForm;
+  password:FormControl;
   authProvider;
   storage = new Storage(localStorage);
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+  form:FormBuilder,  auth: AuthProvider,  
+  
+  
+  
+  
+  ) {
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CreateAccountPage');
   }
+
+  // ionViewDidLoad() {
+  //   console.log('ionViewDidLoad CreateAccountPage');
+  // }
 
 
   //create account
