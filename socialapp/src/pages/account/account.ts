@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams,ActionSheet } from 'ionic-angular';
-import {FirebaseAuthConfig,FirebaseAuthState} from 'angularfire2';
-import {UtilProvider} from '../../providers/utils';
-import {UserProvider} from '../../providers/user-provider/user-provider';
-import {SocialProvider} from '../../providers/social-provider/social-provider';
+import {FirebaseAuthConfig,FirebaseAuthState,AngularFire} from 'angularfire2';
+import {UtilProvider} from '../../providers/util';
+import {UserProvider} from '../../providers/user';
+import {SocialProvider} from '../../providers/social';
+import {AuthProvider} from '../../providers/auth';
 
 /*
   Generated class for the Account page.
@@ -21,11 +22,9 @@ export class AccountPage {
   profile:Object = {};
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-// private afAuth:FirebaseAuth, 
-private util: UtilProvider, 
-private userProvider: UserProvider, 
-private socialProvider: SocialProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private af:AngularFire,
+private util: UtilProvider,private userProvider: UserProvider, private socialProvider: SocialProvider,
+private authProvider:AuthProvider) {
         this.userProvider.getUid()
     .then(uid => {
       this.socialProvider.getUser(uid)
@@ -45,18 +44,51 @@ private socialProvider: SocialProvider) {
 
   //log out
   logout(){
-    this.afAuth.logout();
+    this.authProvider.logout();
   }
 
   //update picture
   updatePicture(){
-    this.present
+     this.presentPictureSource()
+    .then(source => {
+      let sourceType:number = Number(source);
+      return this.util.getPicture(sourceType);
+    })
+    .then(imageData => {
+      var blobImage = this.util.dataURItoBlob(imageData);
+      return this.userProvider.uploadPicture(blobImage);
+    })
+    .then(imageURL => {
+      return this.userProvider.updateProfile({avatar: imageURL});
+    })
+    .then(()=> {
+      let toast = this.util.getToast('Your Picture is updated');
+      toast.present();
+    });
   }
 
-  updateProfile(){
-    let toast = 
+  presentPictureSource() {
+    let promise = new Promise((res, rej) => {
+        let actionSheet = ActionSheet.create({
+          title: 'Select Picture Source',
+          buttons: [
+            { text: 'Camera', handler: () => { res(1); } },
+            { text: 'Gallery', handler: () => { res(0); } },
+            { text: 'Cancel', role: 'cancel', handler: () => { rej('cancel'); } }
+          ]
+        });
+        this.navController.present(actionSheet);
+    });
+    return promise;
   }
 
+  updateProfile() {
+    let toast = this.util.getToast("Your Profile is updated");
+    this.userProvider.updateProfile({name: this.user['name'], about: this.user['about']})
+    .then(()=> {
+      this.navController.present(toast);
+    });
+  }
 
 
 
