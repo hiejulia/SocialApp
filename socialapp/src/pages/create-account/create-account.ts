@@ -30,4 +30,26 @@ export class CreateAccountPage {
     console.log('ionViewDidLoad CreateAccountPage');
   }
 
+
+  //create account
+  createAccount(){
+    let {password,repass,username,name,email} = this.createAccountForm.value;
+    username = username.trim().toLowerCase();
+    if(password !== repass){
+      let alert = this.utilProvider.doAlert("Error",'Password does not match','OK');
+      this.navCtrl.present(alert);//
+      // this.navCtrl.present({
+
+      // });
+    } else {
+      //check is user name is valid
+
+      //if not =>alert
+
+
+      //if valid => create accoumt using fbAuth
+      
+
+    }
+  }
 }
