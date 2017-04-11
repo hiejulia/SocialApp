@@ -10,7 +10,7 @@ import { ActionSheetController } from 'ionic-angular';
   selector: 'page-post',
   templateUrl: 'post.html'
 })
-export class PostPage {
+export class PostPageModal {
   postContent:string;
     image = null;
     blobImage;

@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {NavController, ActionSheet, NavParams} from 'ionic-angular';
+import {UtilProvider} from '../../providers/util';
+import {UserProvider} from '../../providers/user';
+import {SocialProvider} from '../../providers/social';
+
 
 /*
   Generated class for the UserProfile page.
@@ -12,11 +16,27 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'user-profile.html'
 })
 export class UserProfilePage {
+  user = {};
+  profile = {};
+  uid:String;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+  private util: UtilProvider,  private socialProvider: SocialProvider
+  ) {
+      this.uid = navParams.get('uid');
+      console.log(this.uid);
+      this.socialProvider.getUser(this.uid)
+      .subscribe(user => {
+        this.user = user;
+        console.log(user);
+      });
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserProfilePage');
+  }
+  followUser(user) {
+       this.socialProvider.followUser(user);
   }
 
 }
