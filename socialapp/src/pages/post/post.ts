@@ -4,6 +4,7 @@ import {ViewController, ActionSheet} from 'ionic-angular';
 import {SocialProvider} from '../../providers/social';
 import {UtilProvider} from '../../providers/util';
 
+import { ActionSheetController } from 'ionic-angular';
 
 @Component({
   selector: 'page-post',
@@ -18,7 +19,8 @@ export class PostPage {
   private viewController:ViewController, 
        
         private socialProvider: SocialProvider, 
-        private util:UtilProvider) {
+        private util:UtilProvider,
+        public actionSheetCtrl: ActionSheetController) {
 
         }
 
@@ -59,7 +61,7 @@ sendPost() {
 
     presentPictureSource() {
         let promise = new Promise((res, rej) => {
-            let actionSheet = ActionSheet.create({
+            let actionSheet =this.actionSheetCtrl.create({
             title: 'Select Picture Source',
             buttons: [
                 { text: 'Camera', handler: () => { res(1); } },
@@ -67,7 +69,8 @@ sendPost() {
                 { text: 'Cancel', role: 'cancel', handler: () => { rej('cancel'); } }
             ]
             });
-            this.navController.present(actionSheet);
+            // this.navCtrl.present(actionSheet);
+            actionSheet.present();
         });
         return promise;
     }
