@@ -1,12 +1,13 @@
 import {Component} from '@angular/core';
-import {NavController, Storage, LocalStoragem,NavParams} from 'ionic-angular';
+import {NavController,NavParams} from 'ionic-angular';
 import {TabsPage} from '../tabs/tabs';
 import {FormBuilder, Validators, Control} from '@angular/forms';
-import {validateEmail} from '../../validators/email';
+import {validateEmail} from '../validators/email';
 import {AuthProvider} from '../../providers/auth-provider/auth-provider';
 import {UserProvider} from '../../providers/user-provider/user-provider';
 import {UtilProvider} from '../../providers/utils';
 // import {FirebaseAuth} from 'angularfire2';
+import {Storage, LocalStorage} from 'angular';
 import {Inject} from '@angular/core';
 
 /*
@@ -37,8 +38,9 @@ export class CreateAccountPage {
     username = username.trim().toLowerCase();
     if(password !== repass){
       let alert = this.utilProvider.doAlert("Error",'Password does not match','OK');
-      this.navCtrl.present(alert);//
+      // this.navCtrl.present(alert);//
       // this.navCtrl.present({
+        alert.present();//present alert 
 
       // });
     } else {
