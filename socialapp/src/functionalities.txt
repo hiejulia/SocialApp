@@ -1,0 +1,8 @@
++ Each user follow 
++ add friends => following
++ show friends post => feed
++ post comments in the feed posts
++ profile update
++ picture upload in profile and messages
++ add reference to include chat
++ delte comment and posts 
