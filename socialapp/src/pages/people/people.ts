@@ -1,5 +1,11 @@
-import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {UserProvider} from '../../providers/user-provider/user-provider';
+import {SocialProvider} from '../../providers/social-provider/social-provider';
+import {UtilProvider} from '../../providers/utils';
+import {FirebaseListObservable} from 'angularfire2';
+import {UserProfilePage} from '../user-profile/user-profile';
+
 
 /*
   Generated class for the People page.
@@ -12,6 +18,10 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'people.html'
 })
 export class PeoplePage {
+  users;
+  uid;
+  followersObservable:FirebaseListObservable<any>;
+  followers;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
