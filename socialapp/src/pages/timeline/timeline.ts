@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-
+import { NavController, NavParams,ModalController } from 'ionic-angular';
+import {AngularFire} from 'angularfire2';
+import {AuthProvider} from '../../providers/auth';
+import {UserProvider} from '../../providers/user';
+import {SocialProvider} from '../../providers/social';
+import {UtilProvider} from '../../providers/utils';
+import { PostPageModal } from '../post/post';
 /*
   Generated class for the Timeline page.
 
@@ -16,14 +21,27 @@ export class TimelinePage {
   userInput;
   feeds:any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+   private socialProvider: SocialProvider,
+   private userProvider: UserProvider,
+   private af: AngularFire, private ModalCtrl: ModalController) {
+//get the user id
+     this.userProvider.getUid() 
+    .then(uid => { 
+       firebase.database().ref(`/users/${uid}/feed`) 
+       .on('child_added', (snapshot) => { 
+         this.feeds.unshift({$key:snapshot.key, $value: 
+          snapshot.val()}); 
+       }); 
+    }); 
+   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TimelinePage');
   }
 
   openPost(){
-    let modal = Modal.create(PostPageModal); 
+    let modal = this.ModalCtrl.create(PostPageModal); 
     modal.present(); 
   }
 
