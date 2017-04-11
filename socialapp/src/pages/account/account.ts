@@ -5,6 +5,7 @@ import {UtilProvider} from '../../providers/util';
 import {UserProvider} from '../../providers/user';
 import {SocialProvider} from '../../providers/social';
 import {AuthProvider} from '../../providers/auth';
+import { ActionSheetController } from 'ionic-angular'
 
 /*
   Generated class for the Account page.
@@ -22,7 +23,7 @@ export class AccountPage {
   profile:Object = {};
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private af:AngularFire,
+  constructor(public actionSheetCtrl: ActionSheetController,public navCtrl: NavController, public navParams: NavParams,private af:AngularFire,
 private util: UtilProvider,private userProvider: UserProvider, private socialProvider: SocialProvider,
 private authProvider:AuthProvider) {
         this.userProvider.getUid()
@@ -69,7 +70,7 @@ private authProvider:AuthProvider) {
 
   presentPictureSource() {
     let promise = new Promise((res, rej) => {
-        let actionSheet = ActionSheet.create({
+        let actionSheet = this.actionSheetCtrl.create({
           title: 'Select Picture Source',
           buttons: [
             { text: 'Camera', handler: () => { res(1); } },
@@ -77,7 +78,8 @@ private authProvider:AuthProvider) {
             { text: 'Cancel', role: 'cancel', handler: () => { rej('cancel'); } }
           ]
         });
-        this.navController.present(actionSheet);
+        actionSheet.present();
+        // this.navController.present(actionSheet);
     });
     return promise;
   }
@@ -86,7 +88,8 @@ private authProvider:AuthProvider) {
     let toast = this.util.getToast("Your Profile is updated");
     this.userProvider.updateProfile({name: this.user['name'], about: this.user['about']})
     .then(()=> {
-      this.navController.present(toast);
+      // this.navController.present(toast);
+      toast.present();
     });
   }
 
