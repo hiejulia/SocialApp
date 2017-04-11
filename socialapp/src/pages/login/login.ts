@@ -52,7 +52,8 @@ export class LoginPage {
       },(err) => {
         let errMessage = "Enter correct email and password";
         let alert = this.utilProvider.doAlert("Error",errMessage,"OK");
-        this.navCtrl.present(alert);
+        // this.navCtrl.present(alert);
+        alert.present();
       })
   }
 
