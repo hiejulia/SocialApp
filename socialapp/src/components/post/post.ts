@@ -20,7 +20,7 @@ export class PostComponent {
   text: string;
 
   constructor(public socialProvider:SocialProvider) {
-    console.log('Hello Post Component');
+    // console.log('Hello Post Component');
 
   }
   ngOnInit(){

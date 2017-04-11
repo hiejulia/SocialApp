@@ -21,8 +21,18 @@ export class AccountPage {
   profile:Object = {};
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,) {
-
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+// private afAuth:FirebaseAuth, 
+private util: UtilProvider, 
+private userProvider: UserProvider, 
+private socialProvider: SocialProvider) {
+        this.userProvider.getUid()
+    .then(uid => {
+      this.socialProvider.getUser(uid)
+      .subscribe(user => {
+        this.user = user;
+      });
+    });
   }
 
   ionViewDidLoad() {
