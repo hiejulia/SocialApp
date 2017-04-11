@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Alert,Toast}from 'ionic-native';
 import {Camera} from 'ionic-native';
+import { AlertController,Platform } from 'ionic-angular';
 
 /*
   Generated class for the Util provider.
@@ -13,12 +14,12 @@ import {Camera} from 'ionic-native';
 @Injectable()
 export class UtilProvider {
 
-  constructor(public http: Http) {
+  constructor(public http: Http,public Alert: AlertController,private platform: Platform) {
     console.log('Hello Util Provider');
   }
   //doAlert
   doAlert(title, message, buttonText){
-    let alert =Alert.create({
+    let alert =this.Alert.create({
       title:title,
       subTitle:message,
       buttons:[buttonText]
@@ -39,13 +40,16 @@ export class UtilProvider {
   dataURItoBlob(dataURI){
     //convert base 64 to raw binary data held in a string
     let byteString = atob(dataURI.split(','[1]));
+    //separate out the mime component
     let mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    //write the bytes of the string to an array buffer
     let ab =new ArrayBuffer(byteString.length);
     let ia = new Uint8Array(ab);
     for(let i =0;i<byteString.length;i++)
     {
 ia[i] = byteString.charCodeAt(i);
     }
+    //write the arraybuffer to a blob 
      let bb = new Blob([ab], {type:mimeString});
      return bb;
 

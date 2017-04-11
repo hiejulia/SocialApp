@@ -24,11 +24,18 @@ export class PostComponent {
 
   }
   ngOnInit(){
-    let postID = this.feed.$key;
-    this.post =this.socialProvider.getPost(postID);
-    this.post.subscribe(value => {
-      this.poster = this.socialProvider.getUser(value.from);
+    let postID = this.feed.$key;//get the ide of the post 
+    this.post =this.socialProvider.getPost(postID);//get post via socialProvider 
+    this.post.subscribe(value => {//subscribe for the stream of posts
+      this.poster = this.socialProvider.getUser(value.from);//set poster = get user 
     });
   }
 
 }
+
+
+//post component 
+/**
+ * get id of the post 
+ * get post via
+ */

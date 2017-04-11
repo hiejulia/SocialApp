@@ -13,21 +13,23 @@ import firebase from 'firebase';
 @Injectable()
 export class AuthProvider {
   local=new Storage(LocalStorage);
+  public af;
 
-  constructor(public http: Http,public af:AngularFire) {
+  constructor(public http: Http, af:AngularFire) {
     console.log('Hello Auth Provider');
+    this.af = af;
     // this.fbAuth = fbAuth;
   }
 
   getAuth(){
-    return firebase.auth();
+    return this.af.auth;
   }
 
-
+//sign in = log in
   login(credentials){
-    return this.af.auth.login(credentials);
+    return this.af.login(credentials);
   }
-
+//create account
   createAccount(credentials){
     return this.af.auth.createUser(credentials);
   }
